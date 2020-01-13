@@ -5,7 +5,9 @@ dataset = None
 datasetKeys = None
 datasetDirectory = "Dataset_Files"
 datasetFileName = "dataset.txt"
+factFileMappingName = "fact-file-mapping.txt"
 datasetFilePath = os.path.join(datasetDirectory, datasetFileName)
+factFileMappingFilePath = os.path.join(datasetDirectory, factFileMappingName)
     
 def loadDataset():
     global dataset, datasetKeys
@@ -35,11 +37,17 @@ def save(fact, keys, essential_keys, fact_type):
     file = open(os.path.join(datasetDirectory, fileName), 'w')
     file_obj = {}
     file_obj['essentialKeys'] = essential_keys
+    file_obj['keys'] = keys
     file_obj['fact'] = fact
     file_obj['fact_type'] = fact_type
     dataset['nextFile'] += 1
     file.write(json.dumps(file_obj))
     file.close()
+
+    factFileMappingFile = open(factFileMappingFilePath, 'a')
+    factFileMapping = fileName + " - " + fact
+    factFileMappingFile.write(factFileMapping)
+    factFileMappingFile.close()
 
 def main():
     cont = True
