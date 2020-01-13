@@ -29,7 +29,7 @@ def save(fact, keys, essential_keys, fact_type):
     fileName = getFileName(fact)
     for key in keys:
         try:
-            dataset[key].append(fileName)
+            dataset[key.lower()].append(fileName)
         except:
             array = []
             array.append(fileName)
