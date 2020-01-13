@@ -1,0 +1,1 @@
+{"essentialKeys": [], "keys": ["father", "living", "profession", "do", "job", "what"], "fact": "My father was a baptist minister, he kept me in church for as long as i can remember", "fact_type": "t"}

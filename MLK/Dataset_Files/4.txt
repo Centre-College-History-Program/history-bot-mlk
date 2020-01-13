@@ -1,0 +1,1 @@
+{"essentialKeys": [], "keys": ["mother", "job", "what", "do", "profession", "living"], "fact": "My mother always loved being around children, so she decided to become a school teacher to help nuture and teach our youth", "fact_type": "t"}
