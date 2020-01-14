@@ -1,21 +1,22 @@
 import os
+import json
 
 class Dataset:
     
     def __init__(self):
-        datasetDirectory = "Dataset_Files"
+        self.datasetDirectory = "Dataset_Files"
         datasetFileName = "dataset.txt"
-        datasetFile = open(os.path.join(datasetDirectory, datasetFileName), 'r')
+        datasetFile = open(os.path.join(self.datasetDirectory, datasetFileName), 'r')
         index = datasetFile.read()
         datasetFile.close()
         self.dataset = json.loads(index)
     
-    def swap(array, index1, index2):
+    def swap(self, array, index1, index2):
         tempValue = array[index1]
         array[index1] = array[index2]
         array[index2] = tempValue
     
-    def insertSort(arrayInts, arrayVals):
+    def insertSort(self, arrayInts, arrayVals):
         endValue = 1
         while endValue < len(arrayInts):
             index = endValue
@@ -29,6 +30,12 @@ class Dataset:
             swap(arrayInts, endValue, index)
             swap(arrayVals, endValue, index)
             endValue += 1
+    
+    def getResponseObject(self, responseFileName):
+        responseFile = open(os.path.join(self.datasetDirectory, responseFileName), 'r')
+        responseObject = json.loads(responseFile.read())
+        responseFile.close()
+        return responseObject
     
     def getPossibleResponses(self, keys):
         responses = []
@@ -44,5 +51,5 @@ class Dataset:
                         responsesFrequency.append(1)
             except:
                 pass
-        insertSort(responsesFrequency, responses)
-        return responses
+        self.insertSort(responsesFrequency, responses)
+        return responses, responsesFrequency
