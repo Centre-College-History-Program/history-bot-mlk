@@ -53,10 +53,10 @@ def main():
     cont = True
     loadDataset()
     while cont:
-        fact = input("Please enter your fact.\n")
-        keys = input("Please enter your keys (separate keys with a space.)\n")
-        essential_keys = input("Please enter your essential keys (separate keys with a space.)\n")
-        fact_type = input("Please enter the fact type (t for text, a for audio).\n")
+        fact = raw_input("Please enter your fact.\n")
+        keys = raw_input("Please enter your keys (separate keys with a space.)\n")
+        essential_keys = raw_input("Please enter your essential keys (separate keys with a space.)\n")
+        fact_type = raw_input("Please enter the fact type (t for text, a for audio).\n")
 
         keys = keys.split(' ')
         essential_keys = essential_keys.split(' ')
@@ -80,6 +80,6 @@ def main():
 
         save(fact, keys, essential_keys, fact_type)
         saveDataset()
-        contInput = input("Would you like to continue (Y for yes, N for no)?")
+        contInput = raw_input("Would you like to continue (Y for yes, N for no)?")
         cont = contInput.lower() == 'y'
 main()

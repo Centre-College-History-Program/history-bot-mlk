@@ -1,0 +1,1 @@
+{"keys": ["who", "is", "was", "MLK", "Martin", "Luther", "King's", "best", "friend", "closest", "second", "hand", "buddy", "pal", "companion"], "fact_type": "t", "essentialKeys": [], "fact": "The person who I would say is my closest and dearest friend would be Ralph Abernathy. He was with me through thick and thin, and helped me with all of my needs and passions."}
