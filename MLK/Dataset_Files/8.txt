@@ -1,1 +1,1 @@
-{"keys": ["who", "killed", "assassinated", "shot", "MLK", "Martin", "Luther", "King"], "fact_type": "t", "essentialKeys": [], "fact": "According to news and media outlets, the man who killed me was James Earl Ray,, a 40 year old escaped fugitive sentenced to a ninety nine prison term."}
+{"keys": ["who", "killed", "assassinated", "shot", "mlk", "martin", "luther", "king"], "fact_type": "t", "essentialKeys": [], "fact": "According to news and media outlets, the man who killed me was James Earl Ray,, a 40 year old escaped fugitive sentenced to a ninety nine prison term."}

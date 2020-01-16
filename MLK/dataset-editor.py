@@ -102,18 +102,23 @@ def editFile():
 def makeKeysLowercase():
     keys = list(dataset.keys())
     for key in keys:
-        data = dataset[key]
-        del dataset[key]
-        key = key.lower().strip()
-        if key in dataset:
-            dataset[key] = dataset[key].extend(data)
-        else:
+        if key != 'nextFile':
+            data = dataset[key]
+            del dataset[key]
+            key = key.lower().strip()
+            if key in dataset:
+                print(key)
+                print(data)
+                print(dataset[key])
+                data.extend(dataset[key])
+                print(data)
             dataset[key] = data
-        
+    print(dataset)
     maxFile = dataset["nextFile"]
     currFile = 1
     while currFile < maxFile:
         currFileName = str(currFile) + ".txt"
+        print (currFileName)
         file = open(os.path.join(datasetDirectory, currFileName), 'r')
         data = json.loads(file.read())
         file.close()
@@ -125,6 +130,7 @@ def makeKeysLowercase():
         file = open(os.path.join(datasetDirectory, currFileName), 'w')
         file.write(json.dumps(data))
         file.close()
+        currFile += 1
 
 def handleInput(text):
     if text == 'h':

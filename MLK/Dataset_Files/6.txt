@@ -1,1 +1,1 @@
-{"keys": ["When", "did", "you", "MLK", "Martin", "Luther", "King", "death", "die", "day", "killed", "assassinated"], "fact_type": "t", "essentialKeys": [], "fact": "    I was assassinated on April fourth, nineteen sixty eight, by firearm"}
+{"keys": ["when", "did", "you", "mlk", "martin", "luther", "king", "death", "die", "day", "killed", "assassinated"], "fact_type": "t", "essentialKeys": [], "fact": "    I was assassinated on April fourth, nineteen sixty eight, by firearm"}

@@ -1,1 +1,1 @@
-{"essentialKeys": [], "keys": ["When", "born", "birthday", "you", "MLK", "Martin", "Luther", "King", "Junior"], "fact": "I was born on January fifteenth, all the way back in nineteen twenty nine", "fact_type": "t"}
+{"essentialKeys": [], "keys": ["when", "born", "birthday", "you", "mlk", "martin", "luther", "king", "junior"], "fact": "I was born on January fifteenth, all the way back in nineteen twenty nine", "fact_type": "t"}
