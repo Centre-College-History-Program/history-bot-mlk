@@ -42,6 +42,7 @@ class Dataset:
         responsesFrequency = []
         for key in keys:
             try:
+                key = key.lower()
                 newResponses = self.dataset[key]
                 for response in newResponses:
                     if response in responses:
@@ -53,3 +54,6 @@ class Dataset:
                 pass
         self.insertSort(responsesFrequency, responses)
         return responses, responsesFrequency
+    
+    def getFilePath(self, fileName):
+        return os.path.join(self.datasetDirectory, fileName)

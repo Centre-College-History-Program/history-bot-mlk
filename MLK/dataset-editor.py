@@ -107,13 +107,9 @@ def makeKeysLowercase():
             del dataset[key]
             key = key.lower().strip()
             if key in dataset:
-                print(key)
-                print(data)
-                print(dataset[key])
                 data.extend(dataset[key])
-                print(data)
             dataset[key] = data
-    print(dataset)
+            
     maxFile = dataset["nextFile"]
     currFile = 1
     while currFile < maxFile:

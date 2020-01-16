@@ -4,6 +4,8 @@ import RPi.GPIO as GPIO
 import time
 import os
 import random
+from Tkinter import *
+import tkSnack
 from Dataset import Dataset
     
 def getResponseObjects(responses, dataset):
@@ -44,6 +46,12 @@ def getFinalResponse(text, dataset):
         finalResponse = responseObjects[highestFitnessIndex]
     return finalResponse
 
+def playAudio(output):
+    os.system('omxplayer -o alsa ' + output)
+
+def speak(output):
+    print(output)
+
 def main():
     dataset = Dataset()
     
@@ -65,6 +73,7 @@ def main():
                 audio = r.listen(source)
                 text = ""
                 output = "I'm sorry, I couldn't understand you."
+                outputType = 't'
                 try:
                     text = r.recognize_google(audio)    # use recognizer to convert our audio into text part.
                     print("You said : {}".format(text))
@@ -73,9 +82,13 @@ def main():
                         output = "I don't know the answer to that."
                     else:
                         output = finalResponse["fact"]
+                        outputType = finalResponse["fact_type"]
                 except:
                     pass
-                print(output)
+                if outputType == 'a':
+                    playAudio(dataset.getFilePath(output))
+                else:
+                    speak(output)
             time.sleep(1.0)
 
 main()
