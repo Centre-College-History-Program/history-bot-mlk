@@ -1,0 +1,1 @@
+{"keys": ["how", "many", "times", "you", "mlk", "martin", "luther", "king", "jailed", "go", "to", "imprisoned,", "prison", "jail"], "fact_type": "t", "essentialKeys": [], "fact": "I was imprisoned I believe twenty nine times. Some would call me an O G. and with me doing all that time, it was all for acts of civil disobedience and trumpedd charges. The more you know."}

@@ -1,0 +1,1 @@
+{"keys": ["when", "you", "mlk", "martin", "luther", "king", "recieve", "awarded", "given", "earn", "nobel", "peace", "prize", "piece"], "fact_type": "t", "essentialKeys": [], "fact": "I was awarded the nobel peace prize back in nineteen sixty four, fun fact, I was also the youngest to do so back then aswell."}

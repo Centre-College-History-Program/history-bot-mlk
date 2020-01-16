@@ -1,0 +1,1 @@
+{"keys": ["where", "you", "from", "mlk", "martin", "luther", "king", "grow", "up", "what"], "fact_type": "t", "essentialKeys": [], "fact": "I was born and raised in Atlanta, Georgia. No place better than home."}
