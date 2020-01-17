@@ -1,7 +1,7 @@
 #Source here: https://www.simplifiedpython.net/speech-recognition-python/
 import speech_recognition as sr     # import the library
 import RPi.GPIO as GPIO
-from subprocess import Popen
+import subprocess
 import time
 import os
 import random
@@ -9,6 +9,8 @@ from Tkinter import *
 import tkSnack
 from Dataset import Dataset
     
+audioProcess = None    
+
 def getResponseObjects(responses, dataset):
     responseObjects = []
     for response in responses:
@@ -48,10 +50,8 @@ def getFinalResponse(text, dataset):
     return finalResponse
 
 def playAudio(output):
-    streamVideo = Popen(['omxplayer', '-o', 'alsa', output])
-    time.sleep(5)  # Time for the clip to play
-    streamVideo = Popen(['omxplayer', '-i', output])  # Kills the Display
-    #os.system('omxplayer -o alsa ' + output)
+    global audioProcess
+    audioProcess = subprocess.Popen(['omxplayer', '-o', 'alsa', output], stdin=subprocess.PIPE)
 
 def speak(output):
     print(output)
@@ -72,6 +72,8 @@ def main():
     while True:
         input_state = GPIO.input(button) # primes the button!
         if input_state == False:
+            if audioProcess:
+                audioProcess.stdin.write('q')
             with sr.Microphone() as source:     # mention source it will be either Microphone or audio files.
                 print("Speak Anything :")
                 audio = r.listen(source)
@@ -87,8 +89,8 @@ def main():
                     else:
                         output = finalResponse["fact"]
                         outputType = finalResponse["fact_type"]
-                except:
-                    pass
+                except Exception as e:
+                    print(e)
                 if outputType == 'a':
                     playAudio(dataset.getFilePath(output))
                 else:
