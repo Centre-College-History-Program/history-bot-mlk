@@ -1,6 +1,7 @@
 #Source here: https://www.simplifiedpython.net/speech-recognition-python/
 import speech_recognition as sr     # import the library
 import RPi.GPIO as GPIO
+from subprocess import Popen
 import time
 import os
 import random
@@ -47,7 +48,10 @@ def getFinalResponse(text, dataset):
     return finalResponse
 
 def playAudio(output):
-    os.system('omxplayer -o alsa ' + output)
+    streamVideo = Popen(['omxplayer', '-o', 'alsa', output])
+    time.sleep(5)  # Time for the clip to play
+    streamVideo = Popen(['omxplayer', '-i', output])  # Kills the Display
+    #os.system('omxplayer -o alsa ' + output)
 
 def speak(output):
     print(output)
