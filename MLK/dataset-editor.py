@@ -21,6 +21,35 @@ def saveDataset():
     datasetFile = open(datasetFilePath, 'w')
     datasetFile.write(json.dumps(dataset))
     datasetFile.close()
+
+def changeKey():
+    #Get the key information
+    oldKey = raw_input('What is the existing spelling of the key?\n')
+    newKey = raw_input('What is the new spelling of the key?\n')
+
+    #Get the existing files associated with the keys
+    oldKeyFiles = dataset[oldKey]
+    newKeyFiles = []
+    if newKey in dataset:
+        newKeyFiles = dataset[newKey]
+
+    for oldKeyFile in oldKeyFiles:
+        if oldKeyFile not in newKeyFiles:
+            newKeyFiles.append(oldKeyFile)
+
+    dataset[newKey] = newKeyFiles
+    del dataset[oldKey]
+
+    for fileName in oldKeyFiles:
+        file = open(os.path.join(datasetDirectory, fileName), 'r')
+        data = json.loads(file.read())
+        file.close()
+        data['keys'].append(newKey)
+        data['keys'].remove(oldKey)
+        file = open(os.path.join(datasetDirectory, fileName), 'w')
+        file.write(json.dumps(data))
+        file.close()
+        
     
 def editKey():
     
@@ -141,6 +170,8 @@ def handleInput(text):
         editFile()
     elif text == 'l':
         makeKeysLowercase()
+    elif text == 'c':
+        changeKey()
     else:
         print("That was not a recongizable input\n")
 
@@ -151,6 +182,7 @@ def printHelp():
     helpString += "a - add files to a key\n"
     helpString += "f - add keys to a file\n"
     helpString += "l - make all keys lowercase\n"
+    helpString += "s - change the spelling of a key\n"
     print(helpString)
 
 def main():
