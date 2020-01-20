@@ -25,8 +25,8 @@ def saveDataset():
 def editKey():
     
     #Get the key and file names
-    key = input('What is your key?\n')
-    files = input('What files would you like to have this key?\n(E.g. write "1 2 3" if you want this key for 1.txt, 2.txt, and 3.txt)\n')
+    key = raw_input('What is your key?\n')
+    files = raw_input('What files would you like to have this key?\n(E.g. write "1 2 3" if you want this key for 1.txt, 2.txt, and 3.txt)\n')
     
     key = key.lower().strip() #Remove whitespace from the key
     files = files.split(' ') #Split up the file names
@@ -67,11 +67,13 @@ def editKey():
         
 def editFile():
     #Get the file and the new keys
-    fileName = input('What is your file (e.g. type 1 for 1.txt)?\n')
-    keys = input('What are the new keys (separate the keys with a space)?\n')
+    fileName = raw_input('What is your file (e.g. type 1 for 1.txt)?\n')
+    keys = raw_input('What are the new keys (separate the keys with a space)?\n')
+    
+    keys = keys.split(' ') #Separate the keys
     
     #Adjust the file name and add create the file path
-    fileName = file.strip() + '.txt'
+    fileName = fileName.strip() + '.txt'
     filePath = os.path.join(datasetDirectory, fileName)
     
     #Get the existing keys associated with file
@@ -97,6 +99,8 @@ def editFile():
     
     #Add the file to the keys in the dataset
     for key in newKeys:
+        if key not in dataset:
+            dataset[key] = []
         dataset[key].append(fileName)
 
 def makeKeysLowercase():
@@ -155,7 +159,7 @@ def main():
     print("Welcome to the dataset editor. These are your possible commands:")
     printHelp()
     while cont:
-        text = input("Enter your command:\n")
+        text = raw_input("Enter your command:\n")
         text = text.lower()
         if text != 'q':
             handleInput(text)

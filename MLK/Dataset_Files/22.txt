@@ -1,0 +1,1 @@
+{"keys": ["who", "was", "your", "mlk", "martin", "luther", "king", "first", "born", "child"], "fact_type": "t", "essentialKeys": [], "fact": "My first born child was Yolanda King, born on November seventeenth nineteen fifty five"}
