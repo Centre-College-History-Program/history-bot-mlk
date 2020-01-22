@@ -8,7 +8,8 @@ import random
 from Tkinter import *
 import tkSnack
 from Dataset import Dataset
-    
+
+random.seed()
 audioProcess = None    
 
 def getResponseObjects(responses, dataset):
@@ -93,6 +94,9 @@ def main():
                     print(e)
                 if outputType == 'a':
                     playAudio(dataset.getFilePath(output))
+                elif outputType == 'r':
+                    choice = output[random.randint(0, len(output) - 1)]
+                    speak(choice)
                 else:
                     speak(output)
             time.sleep(1.0)

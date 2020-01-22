@@ -53,10 +53,28 @@ def main():
     cont = True
     loadDataset()
     while cont:
-        fact = raw_input("Please enter your fact.\n")
+        validFactType = False
+        validFactTypes = ['a', 't', 'r']
+        while not validFactType:
+            fact_type = raw_input("Please enter the fact type (t for text, a for audio, r for a random value from an array).\n")
+            validFactType = fact_type in validFactTypes
+            if not validFactType:
+                print("That fact type is not valid, please give a valid type.")
+        if fact_type == 'a':
+            fact = raw_input("Please enter the name of your audio file and put the file in the Dataset_Files directory.\n")
+        elif fact_type == 'r':
+            fact = []
+            addAnotherFact = True
+            while addAnotherFact:
+                newFact = raw_input("Please enter another string that can be chosen (Enter 'q' to quit).")
+                if newFact.lower().strip() != 'q':
+                    fact.add(newFact)
+                else:
+                    addAnotherFact = False
+        else:
+            fact = raw_input("Please enter your fact.\n")
         keys = raw_input("Please enter your keys (separate keys with a space.)\n")
         essential_keys = raw_input("Please enter your essential keys (separate keys with a space.)\n")
-        fact_type = raw_input("Please enter the fact type (t for text, a for audio).\n")
 
         keys = keys.split(' ')
         essential_keys = essential_keys.split(' ')
