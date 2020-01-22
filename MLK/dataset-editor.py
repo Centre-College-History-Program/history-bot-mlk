@@ -49,7 +49,27 @@ def changeKey():
         file = open(os.path.join(datasetDirectory, fileName), 'w')
         file.write(json.dumps(data))
         file.close()
-        
+
+def appendKey():
+    #Get the key information
+    newKey = raw_input('What is the new key?\n')
+    oldKey = raw_input('What is the existing key?\n')
+
+    #Get the existing files associated with the old key
+    if oldKey not in dataset:
+        print("The key " + oldKey + " is not in the dataset.")
+    else:
+        oldKeyFiles = dataset[oldKey]]
+        dataset[newKey] = oldKeyFiles
+
+        for fileName in oldKeyFiles:
+            file = open(os.path.join(datasetDirectory, fileName), 'r')
+            data = json.loads(file.read())
+            file.close()
+            data['keys'].append(newKey)
+            file = open(os.path.join(datasetDirectory, fileName), 'w')
+            file.write(json.dumps(data))
+            file.close()
     
 def editKey():
     
@@ -170,8 +190,10 @@ def handleInput(text):
         editFile()
     elif text == 'l':
         makeKeysLowercase()
-    elif text == 'c':
+    elif text == 's':
         changeKey()
+    elif text == 'a':
+        appendKey()
     else:
         print("That was not a recongizable input\n")
 
@@ -183,6 +205,7 @@ def printHelp():
     helpString += "f - add keys to a file\n"
     helpString += "l - make all keys lowercase\n"
     helpString += "s - change the spelling of a key\n"
+    helpString += "a - add a new key wherever there is an old key\n"
     print(helpString)
 
 def main():
