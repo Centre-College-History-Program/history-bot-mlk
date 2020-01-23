@@ -27,8 +27,8 @@ class Dataset:
                     cont = index == 0
                 else:
                     cont = False
-            swap(arrayInts, endValue, index)
-            swap(arrayVals, endValue, index)
+            self.swap(arrayInts, endValue, index)
+            self.swap(arrayVals, endValue, index)
             endValue += 1
     
     def getResponseObject(self, responseFileName):
@@ -52,6 +52,7 @@ class Dataset:
                         responsesFrequency.append(1)
             except:
                 pass
+        
         self.insertSort(responsesFrequency, responses)
         return responses, responsesFrequency
     

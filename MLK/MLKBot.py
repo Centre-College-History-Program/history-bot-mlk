@@ -27,8 +27,9 @@ def getFinalResponse(text, dataset):
     responses, responsesFrequency = dataset.getPossibleResponses(keys)
     responseObjects = getResponseObjects(responses, dataset)
     
-    #Calculate the fitness of each response
+    #Calculate the best response
     responsesFitness = []
+    
     for i in range(len(responseObjects)):
         responseObject = responseObjects[i]
         responseFrequency = responsesFrequency[i]
