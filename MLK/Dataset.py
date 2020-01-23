@@ -52,8 +52,9 @@ class Dataset:
                         responsesFrequency.append(1)
             except:
                 pass
-        
+        print(responsesFrequency)
         self.insertSort(responsesFrequency, responses)
+        print(responsesFrequency)
         return responses, responsesFrequency
     
     def getFilePath(self, fileName):
