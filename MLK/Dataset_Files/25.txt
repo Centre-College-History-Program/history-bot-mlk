@@ -1,0 +1,1 @@
+{"keys": ["what", "is", "your", "you", "mlk", "martin", "luther", "king", "king's", "wife", "name"], "fact_type": "t", "essentialKeys": [], "fact": "My wife's name is Corretta Scott King"}

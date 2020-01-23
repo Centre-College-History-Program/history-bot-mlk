@@ -45,7 +45,7 @@ def save(fact, keys, essential_keys, fact_type):
     file.close()
 
     factFileMappingFile = open(factFileMappingFilePath, 'a')
-    factFileMapping = fileName + " - " + fact
+    factFileMapping = fileName + " - " + str(fact)
     factFileMappingFile.write(factFileMapping)
     factFileMappingFile.close()
 
@@ -68,7 +68,7 @@ def main():
             while addAnotherFact:
                 newFact = raw_input("Please enter another string that can be chosen (Enter 'q' to quit).")
                 if newFact.lower().strip() != 'q':
-                    fact.add(newFact)
+                    fact.append(newFact)
                 else:
                     addAnotherFact = False
         else:
