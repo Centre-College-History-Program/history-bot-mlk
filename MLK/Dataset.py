@@ -22,9 +22,9 @@ class Dataset:
             index = endValue
             cont = True
             while cont:
-                if arrayInts[endValue] > arrayInts[index - 1]:
+                if arrayInts[endValue] < arrayInts[index - 1]:
                     index -= 1
-                    cont = index == 0
+                    cont = index != 0
                 else:
                     cont = False
             self.swap(arrayInts, endValue, index)
@@ -52,9 +52,6 @@ class Dataset:
                         responsesFrequency.append(1)
             except:
                 pass
-        print(responsesFrequency)
-        self.insertSort(responsesFrequency, responses)
-        print(responsesFrequency)
         return responses, responsesFrequency
     
     def getFilePath(self, fileName):

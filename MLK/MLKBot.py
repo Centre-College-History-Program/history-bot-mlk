@@ -8,7 +8,7 @@ import random
 from Tkinter import *
 import tkSnack
 from Dataset import Dataset
-from Real-Time-Voice-Cloning import VoiceCloning.Toolbox
+#from Real-Time-Voice-Cloning import VoiceCloning.Toolbox
 
 random.seed()
 audioProcess = None    
@@ -31,10 +31,19 @@ def getFinalResponse(text, dataset):
     #Calculate the best response
     responsesFitness = []
     
-    for i in range(len(responseObjects)):
-        responseObject = responseObjects[i]
-        responseFrequency = responsesFrequency[i]
-        responseFitness = calculateResponseObjectFitness(responseObject, responseFrequency)
+    #Find all of the responses which tied with the most keyword matches
+    maxFrequency = 0
+    bestResponses = []
+    for index in range(len(responsesFrequency)):
+        frequency = responsesFrequency[index]
+        if frequency > maxFrequency:
+            bestResponses = []
+            bestResponses.append(responseObjects[index])
+            maxFrequency = frequency
+    
+    for i in range(len(bestResponses)):
+        responseObject = bestResponses[i]
+        responseFitness = calculateResponseObjectFitness(responseObject, maxFrequency)
         responsesFitness.append(responseFitness)
         
     #Find the response with the highest fitness score
@@ -49,7 +58,7 @@ def getFinalResponse(text, dataset):
     #Return the best response
     finalResponse = -1
     if highestFitnessIndex != -1:
-        finalResponse = responseObjects[highestFitnessIndex]
+        finalResponse = bestResponses[highestFitnessIndex]
     return finalResponse
 
 def playAudio(output):
