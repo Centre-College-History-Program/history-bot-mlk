@@ -24,6 +24,9 @@ def calculateResponseObjectFitness(responseObject, responseFrequency):
     return float(responseFrequency)/len(responseObject["keys"]) 
 
 def getFinalResponse(text, dataset):
+    requiredMaxFrequency = 3
+    requiredAccuracy = 0.33
+    
     keys = text.split(" ")
     responses, responsesFrequency = dataset.getPossibleResponses(keys)
     responseObjects = getResponseObjects(responses, dataset)
@@ -56,8 +59,10 @@ def getFinalResponse(text, dataset):
             highestFitnessIndex = i
     
     #Return the best response
-    finalResponse = -1
-    if highestFitnessIndex != -1:
+    finalResponse = []
+    finalResponse["fact"] = "I don't know how to respond to that"
+    finalResponse["fact_type"] = "t"
+    if highestFitnessIndex != -1 and (maxFrequency > requiredMaxFrequency or responsesFitness[highestFitnessIndex] > requiredAccuracy):
         finalResponse = bestResponses[highestFitnessIndex]
     return finalResponse
 
@@ -96,11 +101,8 @@ def main():
                     text = r.recognize_google(audio)    # use recognizer to convert our audio into text part.
                     print("You said : {}".format(text))
                     finalResponse = getFinalResponse(text, dataset)
-                    if finalResponse == -1:
-                        output = "I don't know the answer to that."
-                    else:
-                        output = finalResponse["fact"]
-                        outputType = finalResponse["fact_type"]
+                    output = finalResponse["fact"]
+                    outputType = finalResponse["fact_type"]
                 except Exception as e:
                     print(e)
                 if outputType == 'a':

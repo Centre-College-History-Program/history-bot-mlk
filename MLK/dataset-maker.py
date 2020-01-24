@@ -45,7 +45,7 @@ def save(fact, keys, essential_keys, fact_type):
     file.close()
 
     factFileMappingFile = open(factFileMappingFilePath, 'a')
-    factFileMapping = fileName + " - " + str(fact)
+    factFileMapping = fileName + " - " + str(fact) + "\n"
     factFileMappingFile.write(factFileMapping)
     factFileMappingFile.close()
 
