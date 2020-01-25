@@ -42,7 +42,8 @@ def stopLights():
 
 def getFinalResponse(text, dataset):
     requiredMaxFrequency = 3
-    requiredAccuracy = 0.33
+    requiredFileKeysAccuracy = 0.33
+    requiredGivenKeysAccuracy = 0.5
     
     keys = text.split(" ")
     responses, responsesFrequency = dataset.getPossibleResponses(keys)
@@ -60,6 +61,8 @@ def getFinalResponse(text, dataset):
             bestResponses = []
             bestResponses.append(responseObjects[index])
             maxFrequency = frequency
+        elif frequency == maxFrequency:
+            bestResponses.append(responseObjects[index])
     
     for i in range(len(bestResponses)):
         responseObject = bestResponses[i]
@@ -69,6 +72,8 @@ def getFinalResponse(text, dataset):
     #Find the response with the highest fitness score
     highestFitness = 0
     highestFitnessIndex = -1
+    print(responsesFitness)
+    print(bestResponses)
     for i in range(len(responsesFitness)):
         responseFitness = responsesFitness[i]
         if responseFitness > highestFitness:
@@ -79,7 +84,7 @@ def getFinalResponse(text, dataset):
     finalResponse = {}
     finalResponse["fact"] = "I don't know how to respond to that"
     finalResponse["fact_type"] = "t"
-    if highestFitnessIndex != -1 and (maxFrequency > requiredMaxFrequency or responsesFitness[highestFitnessIndex] > requiredAccuracy):
+    if highestFitnessIndex != -1 and (maxFrequency >= requiredMaxFrequency or responsesFitness[highestFitnessIndex] >= requiredFileKeysAccuracy) and float(maxFrequency)/(len(keys)) >= requiredGivenKeysAccuracy:
         finalResponse = bestResponses[highestFitnessIndex]
     return finalResponse
 
@@ -88,10 +93,13 @@ def playAudio(output):
     audioProcess = subprocess.Popen(['omxplayer', '-o', 'alsa', output], stdin=subprocess.PIPE)
 
 def speak(output):
+    '''
     tts = gTTS(text=output, lang='en')
     print('Saving...')
     tts.save("speech.mp3")
     os.system("mpg321 speech.mp3")
+    '''
+    print(output)
 
 def main():
     dataset = Dataset()
