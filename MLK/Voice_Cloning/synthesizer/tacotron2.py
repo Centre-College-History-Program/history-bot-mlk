@@ -1,8 +1,8 @@
-from synthesizer.utils.text import text_to_sequence
-from synthesizer.infolog import log
-from synthesizer.models import create_model
-from synthesizer.utils import plot
-from synthesizer import audio
+from .utils.text import text_to_sequence
+from .infolog import log
+from .models import create_model
+from .utils import plot
+from . import audio
 import tensorflow as tf
 import numpy as np
 import os

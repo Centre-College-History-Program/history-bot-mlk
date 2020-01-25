@@ -1,12 +1,12 @@
 import tensorflow as tf
-from synthesizer.utils.symbols import symbols
-from synthesizer.infolog import log
-from synthesizer.models.helpers import TacoTrainingHelper, TacoTestHelper
-from synthesizer.models.modules import *
+from ..utils.symbols import symbols
+from ..infolog import log
+from ..models.helpers import TacoTrainingHelper, TacoTestHelper
+from ..models.modules import *
 from tensorflow.contrib.seq2seq import dynamic_decode
-from synthesizer.models.architecture_wrappers import TacotronEncoderCell, TacotronDecoderCell
-from synthesizer.models.custom_decoder import CustomDecoder
-from synthesizer.models.attention import LocationSensitiveAttention
+from ..models.architecture_wrappers import TacotronEncoderCell, TacotronDecoderCell
+from ..models.custom_decoder import CustomDecoder
+from ..models.attention import LocationSensitiveAttention
 
 import numpy as np
 
