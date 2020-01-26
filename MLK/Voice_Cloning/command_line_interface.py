@@ -228,7 +228,7 @@ class VoiceCloner:
         
         self.current_generated = (self.selected_utterance.speaker_name, spec, breaks, None)
 
-    def vocode(self):
+    def vocode(self, filePath):
         speaker_name, spec, breaks, _ = self.current_generated
         assert spec is not None
 
@@ -245,7 +245,7 @@ class VoiceCloner:
         else:
             print("Waveform generation with Griffin-Lim... ")
             wav = Synthesizer.griffin_lim(spec)
-        print(" Done!", "append")
+        print(" Done with ", filePath)
         
         # Add breaks
         b_ends = np.cumsum(np.array(breaks) * Synthesizer.hparams.hop_size)
@@ -257,7 +257,7 @@ class VoiceCloner:
         # Play it
         wav = wav / np.abs(wav).max() * 0.97
         wav = np.pad(wav, (0, Synthesizer.sample_rate), mode="constant")
-        librosa.output.write_wav("speech.wav", wav.astype(np.float32), Synthesizer.sample_rate)
+        librosa.output.write_wav(filePath, wav.astype(np.float32), Synthesizer.sample_rate)
         #self.play(wav, Synthesizer.sample_rate)
 
         # Compute the embedding

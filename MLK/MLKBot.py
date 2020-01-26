@@ -55,14 +55,18 @@ def getFinalResponse(text, dataset):
     #Find all of the responses which tied with the most keyword matches
     maxFrequency = 0
     bestResponses = []
+    bestResponeFiles = []
     for index in range(len(responsesFrequency)):
         frequency = responsesFrequency[index]
         if frequency > maxFrequency:
             bestResponses = []
+            bestResponeFiles = []
             bestResponses.append(responseObjects[index])
+            bestResponeFiles.append(responses[index])
             maxFrequency = frequency
         elif frequency == maxFrequency:
             bestResponses.append(responseObjects[index])
+            bestResponeFiles.append(responses[index])
     
     for i in range(len(bestResponses)):
         responseObject = bestResponses[i]
@@ -72,8 +76,6 @@ def getFinalResponse(text, dataset):
     #Find the response with the highest fitness score
     highestFitness = 0
     highestFitnessIndex = -1
-    print(responsesFitness)
-    print(bestResponses)
     for i in range(len(responsesFitness)):
         responseFitness = responsesFitness[i]
         if responseFitness > highestFitness:
@@ -84,21 +86,32 @@ def getFinalResponse(text, dataset):
     finalResponse = {}
     finalResponse["fact"] = "I don't know how to respond to that"
     finalResponse["fact_type"] = "t"
+    finalResponse["file_name"] = -1
     if highestFitnessIndex != -1 and (maxFrequency >= requiredMaxFrequency or responsesFitness[highestFitnessIndex] >= requiredFileKeysAccuracy) and float(maxFrequency)/(len(keys)) >= requiredGivenKeysAccuracy:
         finalResponse = bestResponses[highestFitnessIndex]
+        finalResponse["file_name"] = bestResponeFiles[highestFitnessIndex]
     return finalResponse
 
 def playAudio(output):
     global audioProcess
     audioProcess = subprocess.Popen(['omxplayer', '-o', 'alsa', output], stdin=subprocess.PIPE)
 
-def speak(output):
-    '''
-    tts = gTTS(text=output, lang='en')
-    print('Saving...')
-    tts.save("speech.mp3")
-    os.system("mpg321 speech.mp3")
-    '''
+def speak(response, choice = None):
+    fileName = response[file_name]
+    audioDirectory = "MLK_Speech_Files"
+    if chioce:
+        fileName += '_' + str(choice)
+    fileName += ".wav"
+    filePath = os.path.join(audioDirectory, fileName)
+
+    try:
+        playAudio()
+    except:
+        tts = gTTS(text=response['fact'], lang='en')
+        print('Saving...')
+        tts.save("speech.mp3")
+        os.system("mpg321 speech.mp3")
+    
     print(output)
 
 def main():
@@ -134,14 +147,16 @@ def main():
                 print("Speak Anything :")
                 audio = r.listen(source)
                 text = ""
-                output = "I'm sorry, I couldn't understand you."
-                outputType = 't'
+                finalResponse = {}
+                finalResponse['fact'] = "I'm sorry, I couldn't understand you."
+                finalResponse['file_type'] = 't'
+                finalResponse['file_name'] = '-2'
                 try:
                     text = r.recognize_google(audio)    # use recognizer to convert our audio into text part.
                     print("You said : {}".format(text))
                     if text != 'stop':
-                        finalResponse = getFinalResponse(text, dataset)
-                        output = finalResponse["fact"]
+                        finalResponse, fileName = getFinalResponse(text, dataset)
+                        fileName = finalResponse["file_name"]
                         outputType = finalResponse["fact_type"]
                     else:
                         cont = False
@@ -151,10 +166,10 @@ def main():
                     if outputType == 'a':
                         playAudio(dataset.getFilePath(output))
                     elif outputType == 'r':
-                        choice = output[random.randint(0, len(output) - 1)]
-                        speak(choice)
+                        choice = random.randint(0, len(output) - 1)
+                        speak(finalResponse, choice = choice)
                     else:
-                        speak(output)
+                        speak(finalResponse)
             
             flashLightsProcess.terminate()
             stopLights()
