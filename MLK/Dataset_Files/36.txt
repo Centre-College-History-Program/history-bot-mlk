@@ -1,0 +1,1 @@
+{"keys": ["when", "did", "you", "mlk", "martin", "luther", "king", "give", "his", "i", "have", "a", "dream"], "fact_type": "t", "essentialKeys": [], "fact": "August twenty eighth nineteen sixty three, I will never forget that day."}

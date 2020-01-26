@@ -1,0 +1,1 @@
+{"keys": ["what", "is", "your", "mlk", "martin", "luther", "king", "does", "did", "get", "major", "doctorate", "PhD", "in"], "fact_type": "t", "essentialKeys": [], "fact": "Yes I have a P H D in systematic theology"}

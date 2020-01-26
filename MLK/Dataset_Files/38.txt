@@ -1,0 +1,1 @@
+{"keys": ["did", "you", "have", "any", "childhood", "friends", "mlk", "martin", "luther", "king"], "fact_type": "t", "essentialKeys": [], "fact": "yes, some were white for a short time, and the others were from church in my sunday class."}

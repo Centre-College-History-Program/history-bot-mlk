@@ -1,0 +1,1 @@
+{"keys": ["what", "church", "are", "you", "mlk", "martin", "luther", "king", "reverend", "pastor", "preach", "did", "at"], "fact_type": "t", "essentialKeys": [], "fact": "The one and only church I was reverend of is the Dexter Avenue King Memorial Baaptist Chuch"}

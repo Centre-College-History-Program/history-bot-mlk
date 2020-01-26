@@ -1,0 +1,1 @@
+{"keys": ["how", "did", "you", "become", "prominent", "in", "the", "civil", "rights", "movement", "mlk", "martin", "luther"], "fact_type": "t", "essentialKeys": [], "fact": "The media put me as the head aswell as my friends, when in reality anyone could have been in my shoes fighting for justice."}

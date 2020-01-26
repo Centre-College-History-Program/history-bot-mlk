@@ -1,0 +1,1 @@
+{"keys": ["why", "did", "mlk", "you", "choose", "nonviolent", "protesting", "martin", "luther", "king"], "fact_type": "t", "essentialKeys": [], "fact": "I chose this method of fighting because I was tired of attending funerals and seeing my brothers blood on the streets. Death does not bring life or joy, so why bring more death upon us."}
