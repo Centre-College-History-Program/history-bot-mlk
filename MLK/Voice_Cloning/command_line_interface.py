@@ -258,7 +258,7 @@ class VoiceCloner:
         wav = wav / np.abs(wav).max() * 0.97
         wav = np.pad(wav, (0, Synthesizer.sample_rate), mode="constant")
         librosa.output.write_wav(filePath, wav.astype(np.float32), Synthesizer.sample_rate)
-        #self.play(wav, Synthesizer.sample_rate)
+        self.play(wav, Synthesizer.sample_rate)
 
         # Compute the embedding
         # TODO: this is problematic with different sampling rates, gotta fix it

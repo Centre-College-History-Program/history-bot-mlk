@@ -5,6 +5,7 @@ import json
 datasetDirectory = "Dataset_Files"
 outputDirectory = 'MLK_Speech_Files'
 voiceCloner = VoiceCloner()
+'''
 datasetFiles = os.listdir(datasetDirectory)
 for fileName in datasetFiles:
     try:
@@ -34,3 +35,10 @@ for fileName in datasetFiles:
                 voiceCloner.vocode(outputFilePath)
     except Exception as e:
         print(e)
+'''
+fileName = '-1.wav'
+voiceCloner.synthesize("I don't know how to respond to that.")
+voiceCloner.vocode(os.path.join(outputDirectory, fileName))
+fileName = '-2.wav'
+voiceCloner.synthesize("I couldnt understand you.")
+voiceCloner.vocode(os.path.join(outputDirectory, fileName))
