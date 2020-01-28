@@ -50,6 +50,28 @@ def changeKey():
         file.write(json.dumps(data))
         file.close()
 
+def refreshDataset():
+    global dataset
+    files = os.listdir(datasetDirectory)
+    print(files)
+    nextFile = dataset['nextFile']
+    dataset = {}
+    dataset['nextFile'] = nextFile
+    for fileName in files:
+        try:
+            fileNameInt = int(fileName[:-4])
+            filePath = os.path.join(datasetDirectory, fileName)
+            file = open(filePath, 'r')
+            data = json.loads(file.read())
+            file.close()
+            keys = data['keys']
+            for key in keys:
+                if key not in dataset:
+                    dataset[key] = []
+                dataset[key].append(fileName)
+        except:
+            pass
+
 def appendKey():
     #Get the key information
     newKey = input('What is the new key?\n')
@@ -205,6 +227,8 @@ def handleInput(text):
         changeKey()
     elif text == 'a':
         appendKey()
+    elif text == 'r':
+        refreshDataset()
     else:
         print("That was not a recongizable input\n")
 
@@ -217,6 +241,7 @@ def printHelp():
     helpString += "l - make all keys lowercase\n"
     helpString += "s - change the spelling of a key\n"
     helpString += "a - add a new key wherever there is an old key\n"
+    helpString += "r - refresh the dataset\n"
     print(helpString)
 
 def main():

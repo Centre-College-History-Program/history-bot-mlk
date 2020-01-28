@@ -1,1 +1,1 @@
-{"keys": ["Where", "did", "you", "give", "your", "mlk", "martin", "luther", "king", "his", "first", "sermon"], "fact_type": "t", "essentialKeys": [], "fact": "I gave my first sermon on January twenty fourth, nineteen fifty four at Dexter Avenue Baptist"}
+{"keys": ["Where", "did", "you", "give", "your", "mlk", "martin", "luther", "king", "his", "first", "sermon", "a"], "fact_type": "t", "essentialKeys": [], "fact": "I gave my first sermon on January twenty fourth, nineteen fifty four at Dexter Avenue Baptist"}

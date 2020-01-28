@@ -1,1 +1,1 @@
-{"keys": ["have", "you", "mlk", "martin", "luther", "king", "affair", "did"], "fact_type": "t", "essentialKeys": [], "fact": "Yes, I had my low moments and was very vulnerable, it is not an excuse but the reason to why I did it, I love my wife but I have sinned"}
+{"keys": ["have", "you", "mlk", "martin", "luther", "king", "affair", "did", "your", "a"], "fact_type": "t", "essentialKeys": [], "fact": "Yes, I had my low moments and was very vulnerable, it is not an excuse but the reason to why I did it, I love my wife but I have sinned"}
