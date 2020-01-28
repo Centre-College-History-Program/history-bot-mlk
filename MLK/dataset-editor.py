@@ -24,8 +24,8 @@ def saveDataset():
 
 def changeKey():
     #Get the key information
-    oldKey = raw_input('What is the existing spelling of the key?\n')
-    newKey = raw_input('What is the new spelling of the key?\n')
+    oldKey = input('What is the existing spelling of the key?\n')
+    newKey = input('What is the new spelling of the key?\n')
 
     #Get the existing files associated with the keys
     oldKeyFiles = dataset[oldKey]
@@ -52,8 +52,8 @@ def changeKey():
 
 def appendKey():
     #Get the key information
-    newKey = raw_input('What is the new key?\n')
-    oldKey = raw_input('What is the existing key?\n')
+    newKey = input('What is the new key?\n')
+    oldKey = input('What is the existing key?\n')
 
     #Get the existing files associated with the old key
     if oldKey not in dataset:
@@ -75,8 +75,8 @@ def appendKey():
 def editKey():
     
     #Get the key and file names
-    key = raw_input('What is your key?\n')
-    files = raw_input('What files would you like to have this key?\n(E.g. write "1 2 3" if you want this key for 1.txt, 2.txt, and 3.txt)\n')
+    key = input('What is your key?\n')
+    files = input('What files would you like to have this key?\n(E.g. write "1 2 3" if you want this key for 1.txt, 2.txt, and 3.txt)\n')
     
     key = key.lower().strip() #Remove whitespace from the key
     files = files.split(' ') #Split up the file names
@@ -117,8 +117,8 @@ def editKey():
         
 def editFile():
     #Get the file and the new keys
-    fileName = raw_input('What is your file (e.g. type 1 for 1.txt)?\n')
-    keys = raw_input('What are the new keys (separate the keys with a space)?\n')
+    fileName = input('What is your file (e.g. type 1 for 1.txt)?\n')
+    keys = input('What are the new keys (separate the keys with a space)?\n')
     
     keys = keys.split(' ') #Separate the keys
     
@@ -215,7 +215,7 @@ def main():
     print("Welcome to the dataset editor. These are your possible commands:")
     printHelp()
     while cont:
-        text = raw_input("Enter your command:\n")
+        text = input("Enter your command:\n")
         text = text.lower()
         if text != 'q':
             handleInput(text)
