@@ -39,9 +39,10 @@ def flashLights():
     
 def stopLights():
     GPIO.output(processing_led_1, GPIO.LOW)
+    GPIO.output(processing_led_2, GPIO.LOW)
 
 def getFinalResponse(text, dataset):
-    requiredMaxFrequency = 3
+    requiredMaxFrequency = 2
     requiredFileKeysAccuracy = 0.33
     requiredGivenKeysAccuracy = 0.5
     
@@ -86,7 +87,7 @@ def getFinalResponse(text, dataset):
     finalResponse = {}
     finalResponse["fact"] = "I don't know how to respond to that"
     finalResponse["fact_type"] = "t"
-    finalResponse["file_name"] = -1
+    finalResponse["file_name"] = '-1.txt'
     if highestFitnessIndex != -1 and (maxFrequency >= requiredMaxFrequency or responsesFitness[highestFitnessIndex] >= requiredFileKeysAccuracy) and float(maxFrequency)/(len(keys)) >= requiredGivenKeysAccuracy:
         finalResponse = bestResponses[highestFitnessIndex]
         finalResponse["file_name"] = bestResponeFiles[highestFitnessIndex]
@@ -97,24 +98,35 @@ def playAudio(output):
     audioProcess = subprocess.Popen(['omxplayer', '-o', 'alsa', output], stdin=subprocess.PIPE)
 
 def speak(response, choice = None):
-    fileName = response[file_name]
+    fileName = response['file_name']
     audioDirectory = "MLK_Speech_Files"
-    if chioce:
+    fileName = fileName[:-4]
+    if choice:
         fileName += '_' + str(choice)
     fileName += ".wav"
     filePath = os.path.join(audioDirectory, fileName)
-
+    print(filePath)
     try:
-        playAudio()
-    except:
-        tts = gTTS(text=response['fact'], lang='en')
+        f = open(filePath, 'r')
+        f.close()
+        playAudio(filePath)
+    except Exception as e:
+        print(e)
+        output = response['fact']
+        if choice:
+            output = output[choice]
+        tts = gTTS(text=output, lang='en')
         print('Saving...')
         tts.save("speech.mp3")
         os.system("mpg321 speech.mp3")
     
-    print(output)
+    if choice: 
+        print(response['fact'][choice])
+    else:
+        print(response['fact'])
 
 def main():
+    global audioProcess
     dataset = Dataset()
     
     GPIO.setmode(GPIO.BCM) #use the GPIO numbering
@@ -133,6 +145,7 @@ def main():
 
     r = sr.Recognizer()
     cont = True
+    
     while cont:
         input_state = GPIO.input(button) # primes the button!
         
@@ -140,39 +153,42 @@ def main():
             
             flashLightsProcess = Process(target=flashLights)
             flashLightsProcess.start()
-            
             if audioProcess:
-                audioProcess.stdin.write('q')
+                try:
+                    audioProcess.stdin.write('q')
+                except:
+                    pass
+                audioProcess = None
             with sr.Microphone() as source:     # mention source it will be either Microphone or audio files.
                 print("Speak Anything :")
                 audio = r.listen(source)
                 text = ""
                 finalResponse = {}
                 finalResponse['fact'] = "I'm sorry, I couldn't understand you."
-                finalResponse['file_type'] = 't'
-                finalResponse['file_name'] = '-2'
+                finalResponse['fact_type'] = 't'
+                finalResponse['file_name'] = '-2.txt'
                 try:
                     text = r.recognize_google(audio)    # use recognizer to convert our audio into text part.
                     print("You said : {}".format(text))
                     if text != 'stop':
-                        finalResponse, fileName = getFinalResponse(text, dataset)
+                        finalResponse = getFinalResponse(text, dataset)
                         fileName = finalResponse["file_name"]
-                        outputType = finalResponse["fact_type"]
                     else:
                         cont = False
                 except Exception as e:
                     print(e)
+                flashLightsProcess.terminate()
+                stopLights()
+                outputType = finalResponse["fact_type"]
                 if cont:
                     if outputType == 'a':
-                        playAudio(dataset.getFilePath(output))
+                        playAudio(dataset.getFilePath(finalResponse['fact']))
                     elif outputType == 'r':
-                        choice = random.randint(0, len(output) - 1)
+                        choice = random.randint(0, len(finalResponse['fact']) - 1)
                         speak(finalResponse, choice = choice)
                     else:
                         speak(finalResponse)
             
-            flashLightsProcess.terminate()
-            stopLights()
             time.sleep(1.0)
     GPIO.cleanup()
 

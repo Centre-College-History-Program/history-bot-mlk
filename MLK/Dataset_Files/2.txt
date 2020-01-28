@@ -1,1 +1,1 @@
-{"essentialKeys": [], "keys": ["father", "mother", "job", "living", "parents", "profession", "do", "what"], "fact": "My father was a Baptist minister and my mother, oh my sweet mother, was a school teacher.", "fact_type": "t"}
+{"keys": ["father", "mother", "job", "living", "parents", "profession", "do", "what", "parent's", "did", "your", "mom", "and", "dad"], "fact_type": "t", "essentialKeys": [], "fact": "My father was a Baptist minister and my mother, oh my sweet mother, was a school teacher."}

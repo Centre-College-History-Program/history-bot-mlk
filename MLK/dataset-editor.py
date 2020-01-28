@@ -59,14 +59,15 @@ def appendKey():
     if oldKey not in dataset:
         print("The key " + oldKey + " is not in the dataset.")
     else:
-        oldKeyFiles = dataset[oldKey]]
+        oldKeyFiles = dataset[oldKey]
         dataset[newKey] = oldKeyFiles
 
         for fileName in oldKeyFiles:
             file = open(os.path.join(datasetDirectory, fileName), 'r')
             data = json.loads(file.read())
             file.close()
-            data['keys'].append(newKey)
+            if newKey not in data['keys']:
+                data['keys'].append(newKey)
             file = open(os.path.join(datasetDirectory, fileName), 'w')
             file.write(json.dumps(data))
             file.close()

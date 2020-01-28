@@ -1,0 +1,1 @@
+{"keys": ["did", "you", "earn", "get", "degree", "degrees", "education", "where", "undergraduate", "and", "doyour", "any"], "fact_type": "t", "essentialKeys": [], "fact": "I earned an undergraduate degree from Morehouse College\\n and a doctorate from Boston University"}

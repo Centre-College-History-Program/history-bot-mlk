@@ -1,0 +1,1 @@
+{"keys": ["my", "favorite", "quote", "please", "say", "give", "me", "play"], "fact_type": "t", "essentialKeys": [], "fact": "It may be true that the law cannot make a man love me, but it can keep him from lynching me, and I think thats pretty important."}
