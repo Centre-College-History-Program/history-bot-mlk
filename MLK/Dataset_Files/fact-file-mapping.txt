@@ -43,3 +43,6 @@
 43.txt - It may be true that the law cannot make a man love me, but it can keep him from lynching me, and I think thats pretty important.
 44.txt - I am Martin Luther King Jr., who are you, just kidding I do not care. Ask me questions.
 45.txt - I earned an undergraduate degree from Morehouse College\n and a doctorate from Boston University
+46.txt - MLKMountaintop.flac
+47.txt - BeyondVietnam.flac
+48.txt - MLKNobelPrizeAcceptanceSpeech.flac

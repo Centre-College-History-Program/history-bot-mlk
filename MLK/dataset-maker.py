@@ -56,25 +56,25 @@ def main():
         validFactType = False
         validFactTypes = ['a', 't', 'r']
         while not validFactType:
-            fact_type = raw_input("Please enter the fact type (t for text, a for audio, r for a random value from an array).\n")
+            fact_type = input("Please enter the fact type (t for text, a for audio, r for a random value from an array).\n")
             validFactType = fact_type in validFactTypes
             if not validFactType:
                 print("That fact type is not valid, please give a valid type.")
         if fact_type == 'a':
-            fact = raw_input("Please enter the name of your audio file and put the file in the Dataset_Files directory.\n")
+            fact = input("Please enter the name of your audio file and put the file in the Dataset_Files directory.\n")
         elif fact_type == 'r':
             fact = []
             addAnotherFact = True
             while addAnotherFact:
-                newFact = raw_input("Please enter another string that can be chosen (Enter 'q' to quit).")
+                newFact = input("Please enter another string that can be chosen (Enter 'q' to quit).")
                 if newFact.lower().strip() != 'q':
                     fact.append(newFact)
                 else:
                     addAnotherFact = False
         else:
-            fact = raw_input("Please enter your fact.\n")
-        keys = raw_input("Please enter your keys (separate keys with a space.)\n")
-        essential_keys = raw_input("Please enter your essential keys (separate keys with a space.)\n")
+            fact = input("Please enter your fact.\n")
+        keys = input("Please enter your keys (separate keys with a space.)\n")
+        essential_keys = input("Please enter your essential keys (separate keys with a space.)\n")
 
         keys = keys.split(' ')
         essential_keys = essential_keys.split(' ')
@@ -98,6 +98,6 @@ def main():
 
         save(fact, keys, essential_keys, fact_type)
         saveDataset()
-        contInput = raw_input("Would you like to continue (Y for yes, N for no)?")
+        contInput = input("Would you like to continue (Y for yes, N for no)?")
         cont = contInput.lower() == 'y'
 main()
