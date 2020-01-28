@@ -1,13 +1,15 @@
-from .ui import UI
-from ..encoder import inference as encoder
-from ..synthesizer.inference import Synthesizer
-from ..vocoder import inference as vocoder
+from toolbox.ui import UI
+from encoder import inference as encoder
+from synthesizer.inference import Synthesizer
+from vocoder import inference as vocoder
 from pathlib import Path
 from time import perf_counter as timer
-from .utterance import Utterance
+from toolbox.utterance import Utterance
 import numpy as np
 import traceback
 import sys
+import os
+import librosa
 
 
 # Use this directory structure for your datasets, or modify it to fit your needs
@@ -37,6 +39,7 @@ recognized_datasets = [
 class Toolbox:
     def __init__(self, datasets_root, enc_models_dir, syn_models_dir, voc_models_dir, low_mem):
         sys.excepthook = self.excepthook
+        self.counter = -3
         self.datasets_root = datasets_root
         self.low_mem = low_mem
         self.utterances = set()
@@ -209,7 +212,12 @@ class Toolbox:
 
         # Play it
         wav = wav / np.abs(wav).max() * 0.97
-        self.ui.play(wav, Synthesizer.sample_rate)
+        wav = np.pad(wav, (0, Synthesizer.sample_rate), mode="constant")
+        fileName = str(self.counter) + '.wav'
+        filePath = os.path.join('MLK_Speech_files', fileName)
+        self.counter += 1
+        librosa.output.write_wav(filePath, wav.astype(np.float32), Synthesizer.sample_rate)
+        #self.ui.play(wav, Synthesizer.sample_rate)
 
         # Compute the embedding
         # TODO: this is problematic with different sampling rates, gotta fix it

@@ -11,26 +11,6 @@ class Dataset:
         datasetFile.close()
         self.dataset = json.loads(index)
     
-    def swap(self, array, index1, index2):
-        tempValue = array[index1]
-        array[index1] = array[index2]
-        array[index2] = tempValue
-    
-    def insertSort(self, arrayInts, arrayVals):
-        endValue = 1
-        while endValue < len(arrayInts):
-            index = endValue
-            cont = True
-            while cont:
-                if arrayInts[endValue] < arrayInts[index - 1]:
-                    index -= 1
-                    cont = index != 0
-                else:
-                    cont = False
-            self.swap(arrayInts, endValue, index)
-            self.swap(arrayVals, endValue, index)
-            endValue += 1
-    
     def getResponseObject(self, responseFileName):
         responseFile = open(os.path.join(self.datasetDirectory, responseFileName), 'r')
         responseObject = json.loads(responseFile.read())

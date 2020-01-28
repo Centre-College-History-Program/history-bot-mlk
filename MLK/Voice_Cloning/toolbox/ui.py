@@ -2,8 +2,8 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
-from ..encoder.inference import plot_embedding_as_heatmap
-from .utterance import Utterance
+from encoder.inference import plot_embedding_as_heatmap
+from toolbox.utterance import Utterance
 from pathlib import Path
 from typing import List, Set
 import sounddevice as sd
@@ -14,6 +14,7 @@ from time import sleep
 import umap
 import sys
 from warnings import filterwarnings
+import os
 filterwarnings("ignore")
 
 
@@ -270,6 +271,10 @@ class UI(QDialog):
     def populate_models(self, encoder_models_dir: Path, synthesizer_models_dir: Path, 
                         vocoder_models_dir: Path):
         # Encoder
+        print("---------------------------------------")
+        print(encoder_models_dir)
+        print(os.listdir(encoder_models_dir))
+        print("---------------------------------------")
         encoder_fpaths = list(encoder_models_dir.glob("*.pt"))
         if len(encoder_fpaths) == 0:
             raise Exception("No encoder models found in %s" % encoder_models_dir)

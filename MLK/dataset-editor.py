@@ -185,7 +185,7 @@ def makeKeysLowercase():
 def handleInput(text):
     if text == 'h':
         printHelp()
-    elif text == 'a':
+    elif text == 'k':
         editKey()
     elif text == 'f':
         editFile()
@@ -202,7 +202,7 @@ def printHelp():
     helpString = "\n"
     helpString += "q - quit\n"
     helpString += "h - help\n"
-    helpString += "a - add files to a key\n"
+    helpString += "k - add files to a key\n"
     helpString += "f - add keys to a file\n"
     helpString += "l - make all keys lowercase\n"
     helpString += "s - change the spelling of a key\n"
