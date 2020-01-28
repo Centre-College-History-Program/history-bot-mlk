@@ -60,9 +60,19 @@ def appendKey():
         print("The key " + oldKey + " is not in the dataset.")
     else:
         oldKeyFiles = dataset[oldKey]
-        dataset[newKey] = oldKeyFiles
+        newKeyFiles = []
+        appendedOldKeyFiles = []
+        if newKey in dataset:
+            newKeyFiles = dataset[newKey]
+        for file in oldKeyFiles:
+            if file not in newKeyFiles:
+                newKeyFiles.append(file)
+                appendedOldKeyFiles.append(file)
+            else:
+                print(file + " already associated with both keys.")
+        dataset[newKey] = newKeyFiles
 
-        for fileName in oldKeyFiles:
+        for fileName in appendedOldKeyFiles:
             file = open(os.path.join(datasetDirectory, fileName), 'r')
             data = json.loads(file.read())
             file.close()

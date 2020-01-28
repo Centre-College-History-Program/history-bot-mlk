@@ -10,6 +10,7 @@ from Tkinter import *
 import tkSnack
 from Dataset import Dataset
 from gtts import gTTS
+import signal
 #from Real-Time-Voice-Cloning import VoiceCloning.Toolbox
 
 random.seed()
@@ -95,7 +96,7 @@ def getFinalResponse(text, dataset):
 
 def playAudio(output):
     global audioProcess
-    audioProcess = subprocess.Popen(['omxplayer', '-o', 'alsa', output], stdin=subprocess.PIPE)
+    audioProcess = subprocess.Popen("exec play " + output, stdout=subprocess.PIPE, shell=True)
 
 def speak(response, choice = None):
     fileName = response['file_name']
@@ -155,7 +156,7 @@ def main():
             flashLightsProcess.start()
             if audioProcess:
                 try:
-                    audioProcess.stdin.write('q')
+                    audioProcess.kill()
                 except:
                     pass
                 audioProcess = None
